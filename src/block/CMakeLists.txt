@@ -17,13 +17,13 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
-add_executable(block_node ${SOURCES})
+add_executable(block ${SOURCES})
 
 # add dependencies to executable by <depend>
-ament_target_dependencies(block_node rclcpp std_msgs)
+ament_target_dependencies(block rclcpp std_msgs)
 
 # install the executable to lib/${PROJECT_NAME}
-install(TARGETS block_node 
+install(TARGETS block 
         DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
