@@ -8,22 +8,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # C/C++ configuration "compileCommands": "${workspaceFolder}/build/compile_commands.json"
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include_directories(include)
-
 # find all source files automatically
 aux_source_directory(src SOURCES)
 
-find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
-add_executable(block ${SOURCES})
+ament_auto_add_executable(block ${SOURCES})
 
-# add dependencies to executable by <depend>
-ament_target_dependencies(block rclcpp std_msgs)
-
-# install the executable to lib/${PROJECT_NAME}
-install(TARGETS block 
-        DESTINATION lib/${PROJECT_NAME})
-
-ament_package()
+ament_auto_package()
