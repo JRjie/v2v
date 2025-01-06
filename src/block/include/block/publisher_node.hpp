@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
 
 class PublisherNode : public rclcpp::Node
 {
@@ -18,8 +17,6 @@ class PublisherNode : public rclcpp::Node
 
     }
 
-    private:
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
     
 };
 
