@@ -8,16 +8,13 @@
 
 #include "rclcpp/rclcpp.hpp"
 
-class PublisherNode : public rclcpp::Node
-{
+class PublisherNode : public rclcpp::Node {
   public:
     PublisherNode()
-    : Node("publisher_node")
-    {
+    : Node("publisher_node"){}
 
-    }
+    explicit PublisherNode(const rclcpp::NodeOptions & options);
 
-    
 };
 
 

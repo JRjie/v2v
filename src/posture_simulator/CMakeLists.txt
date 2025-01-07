@@ -16,7 +16,8 @@ ament_auto_find_build_dependencies()
 
 find_package(Boost REQUIRED COMPONENTS system)
 
-ament_auto_add_executable(posture_simulator ${SOURCES})
+# ament_auto_add_executable(posture_simulator ${SOURCES})
+ament_auto_add_library(posture_simulator SHARED ${SOURCES})
 
 target_link_libraries(posture_simulator Boost::system)
 

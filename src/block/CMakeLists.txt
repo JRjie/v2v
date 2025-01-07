@@ -14,6 +14,6 @@ aux_source_directory(src SOURCES)
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
-ament_auto_add_executable(block ${SOURCES})
+ament_auto_add_library(block ${SOURCES})
 
 ament_auto_package()

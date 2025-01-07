@@ -6,15 +6,16 @@
 #include <boost/asio.hpp>
 
 #include "rclcpp/rclcpp.hpp"
+
 #include "my_interfaces/msg/posture.hpp"
 #include "my_interfaces/msg/posture_array.hpp"
 
-class SelfPosturePublisher : public rclcpp::Node
-{
+class SelfPosturePublisher : public rclcpp::Node {
   public:
     SelfPosturePublisher()
     : Node("self_posture_publisher"){}
 
+  explicit SelfPosturePublisher(const rclcpp::NodeOptions & options);
     
 };
 
