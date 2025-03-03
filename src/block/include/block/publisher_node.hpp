@@ -6,16 +6,21 @@
 #include <string>
 #include <vector>
 
-#include "rclcpp/rclcpp.hpp"
+#include <rclcpp/rclcpp.hpp>
 
+#include "my_interface/posture_array.hpp"
+
+namespace block
+{
 class PublisherNode : public rclcpp::Node {
   public:
-    PublisherNode()
-    : Node("publisher_node"){}
-
     explicit PublisherNode(const rclcpp::NodeOptions & options);
+
+  private:
+    rclcpp::Publisher<my_interfaces::msg::PostureArray>::SharedPtr publisher;
+
 
 };
 
-
+} // namespace
 #endif
