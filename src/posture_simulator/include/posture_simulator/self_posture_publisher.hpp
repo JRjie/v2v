@@ -12,10 +12,7 @@
 
 class SelfPosturePublisher : public rclcpp::Node {
   public:
-    SelfPosturePublisher()
-    : Node("self_posture_publisher"){}
-
-  explicit SelfPosturePublisher(const rclcpp::NodeOptions & options);
+    explicit SelfPosturePublisher(const rclcpp::NodeOptions & options);
     
 };
 
