@@ -16,7 +16,7 @@ PublisherNode::PublisherNode(const rclcpp::NodeOptions &options)
   socket = std::make_unique<boost::asio::ip::udp::socket>(io_service, udp::endpoint(udp::v4(), port));
 
   udp_thread = std::thread([this]() {
-    CreateUDP();
+    StartReceive();
     io_service.run();
   });
 }
@@ -30,9 +30,37 @@ PublisherNode::~PublisherNode()
   }
 }
 
-void PublisherNode::CreateUDP(const io_service &io, const int &port)
+void PublisherNode::StartReceive(const io_service &io, const int &port)
 {
+  socket->async_receive_from(
+    boost::asio::buffer(receive_buffer), remote_endpoint_,
+    [this](const boost::system::error_code &error, std::size_t bytes_transferred)
+    {
+      HandleReceive(error, bytes_transferred);
+    }
+  );
+}
 
+void PublisherNode::HandleReceive(const boost::system::error_code &error, size_t bytes_transferred)
+{
+  if(!error && bytes_transferred > 0)
+  {
+    // 将数据转换为字符串
+    std::string data(recv_buffer.data(), bytes_transferred);
+    
+    auto msg = Split(data);
+
+    publisher->publish(msg);
+            
+    RCLCPP_INFO(this->get_logger(), "Received and published: '%s'", data.c_str());
+  }
+  StartReceive();
+}
+
+my_interfaces::msg::PostureArray PublisherNode::Split(const std::string &data)
+{
+  //my_id@id1.x1.y1.z1.p1.y1.r1.t1.h1|id2.x2.y2.z2.p2.y2.r2.t2.h2| ... 
+  
 }
 
 } //namespace

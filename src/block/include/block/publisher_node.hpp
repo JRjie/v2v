@@ -23,7 +23,11 @@ class PublisherNode : public rclcpp::Node {
 
   private:
     rclcpp::Publisher<my_interfaces::msg::PostureArray>::SharedPtr publisher;
-    void CreateUDP(const io_service &io, const int &port);
+    
+    void StartReceive(const io_service &io, const int &port);
+    void HandleReceive(const boost::system::error_code &error, size_t bytes_transferred);
+
+    my_interfaces::msg::PostureArray Split(const std::string &data);
 
   private:
     int port;
